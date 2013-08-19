@@ -8,8 +8,6 @@ App.IndexRoute = Em.Route.extend({
 
 App.SongRoute = Em.Route.extend({
   model: function(params) {
-    console.log('existing model?: ' + this.get('model'));
-    console.log(params);
     return App.Song.fromBase64Compressed(params.base64);
   }
 });

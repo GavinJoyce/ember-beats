@@ -44,7 +44,7 @@ App.Song = Ember.Object.extend(Ember.Evented, {
     );
   },
   default: function() {
-    return App.Song.fromPreset('default');
+    return App.Song.fromPreset('simple1');
   },
   presets: {
     'default': 'N4IgdghgtgpiBcICqYAuBLVAbGATEANCKjFAA4D2CAjAAy1EDGAFhGGDFgM4IDaoXCgFcw%2BRAGt0jcYRAA3CliGwaRLiTI94%2FeZwqNMATxoBfAqDl6DqY%2FFpmLVownvndWfc7sP3nm6bdLD2tbV0dgrzDfEJcfIL9bajinf29AlNDkiNSo%2BJj4JPTszKKElwA6AFYssu8AXR9BETEQZnRWVAB9CjIYMFkFJRUCtQ0tHTzImvzcjIrq0pnpqcWV8NraKuWc7ZL1pdWcrcO96LWznZP53diGhqAAA%3D',
