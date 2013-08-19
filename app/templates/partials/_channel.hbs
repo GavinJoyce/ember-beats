@@ -1,0 +1,24 @@
+<div {{bindAttr class="class"}}>
+  <span class="channel-cycle">
+    <div>
+      <button type="button" class="tiny transparent" {{action previous}}>
+        <i class="icon-circle-arrow-up icon-white"></i>
+      </button>
+    </div>
+    <div>
+      <button type="button" class="tiny transparent" {{action next}}>
+        <i class="icon-circle-arrow-down icon-white"></i>
+      </button>
+    </div>
+  </span>
+  <span class="controls">
+    <h3>{{sound}}</h3>
+    <span class="channel-closer">
+      <button type="button" class="tiny transparent" {{action delete}}>
+        <i class="icon-remove-circle icon-white"></i>
+      </button>
+    </span>
+  </span>
+
+  {{render "steps" steps}}
+</div>

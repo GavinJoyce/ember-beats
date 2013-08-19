@@ -1,0 +1,20 @@
+{{render "playback" model}}
+{{render "channels" model.channels}}
+
+{{#if debug}}
+  <div>
+    <style>
+      textarea { width: 100%; height: 200px; }
+    </style>
+
+
+    <hr />
+    <h1>Debug Info</h1>
+
+    <h2>Json: ({{json.length}})<h2>
+    {{view Ember.TextArea valueBinding="json"}}
+
+    <h2>Permalink: ({{permalink.length}})<h2>
+    {{view Ember.TextArea valueBinding="permalink"}}
+  </div>
+{{/if}}
