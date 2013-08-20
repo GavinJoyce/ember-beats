@@ -64,7 +64,7 @@ App.PlaybackController = Em.ObjectController.extend({
     return 'http://www.facebook.com/sharer.php?u=' + this.get('encodedPermalink');
   }.property('permalink'),
   twitterPermalink: function() {
-    return 'http://twitter.com/share?url=' + this.get('encodedPermalink') + '&text=Check%20out%20these%20beats%20#emberbeats';
+    return 'http://twitter.com/share?url=' + this.get('encodedPermalink') + '&text=Check%20out%20these%20beats%20';
   }.property('permalink')
 });
 
