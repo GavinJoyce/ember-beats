@@ -4,6 +4,7 @@ require('templates/application');
 require('templates/index');
 require('templates/channels');
 require('templates/partials/_channel');
+require('templates/partials/_share');
 require('templates/song');
 require('templates/playback');
 require('templates/steps');

@@ -3,6 +3,7 @@ var App = require('app');
 App.PlaybackController = Em.ObjectController.extend({
   tickCount: null,
   isActive: false,
+  shareVisible: false,
   sixteenth: function() {
     return (this.get('tickCount') % 4) + 1;
   }.property('tickCount'),
@@ -46,5 +47,24 @@ App.PlaybackController = Em.ObjectController.extend({
     if(this.get('tempo') > 5) {
       this.set('tempo', this.get('tempo') - 5);
     }
-  }
+  },
+  toggleShare: function() {
+    this.toggleProperty('shareVisible');
+  },
+  encodedPermalink: function() {
+    return encodeURIComponent(this.get('permalink'));
+  }.property('permalink'),
+  emailPermalink: function() {
+    return "mailto:?subject=Check Out These Beats&body=" + this.get('encodedPermalink');
+  }.property('permalink'),
+  googlePermalink: function() {
+    return 'https://plus.google.com/share?url=' + this.get('encodedPermalink');
+  }.property('permalink'),
+  facebookPermalink: function() {
+    return 'http://www.facebook.com/sharer.php?u=' + this.get('encodedPermalink');
+  }.property('permalink'),
+  twitterPermalink: function() {
+    return 'http://twitter.com/share?url=' + this.get('encodedPermalink') + '&text=Check%20out%20these%20beats%20#emberbeats';
+  }.property('permalink')
 });
+

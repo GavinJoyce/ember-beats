@@ -13,14 +13,16 @@ App.Song = Ember.Object.extend(Ember.Evented, {
     var base64 = LZString.compressToBase64(this.get('json'));
     return encodeURIComponent(base64);
   }.property('json'),
-
+  permalink: function() {
+    return location.protocol + "//" + location.host + "/#/song/" + this.get('base64Compressed');
+  }.property('base64Compressed'),
   lastUpdated: function() {
     return new Date();
-  }.property('name', 'tempo'),
-
+  }.property('name', 'artist', 'tempo'),
   serialize: function() {
     return {
       name: this.get('name'),
+      artist: this.get('artist'),
       tempo: this.get('tempo'),
       channels: this.get('channels').invoke('serialize')
     };
@@ -29,6 +31,7 @@ App.Song = Ember.Object.extend(Ember.Evented, {
   deserialise: function(data) {
     return App.Song.create({
       name: data.name,
+      artist: data.artist,
       tempo: data.tempo,
       channels: App.Channel.deserialiseArray(data.channels)
     });

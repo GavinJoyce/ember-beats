@@ -1,0 +1,9 @@
+<div class="share" style="background-color: white; padding: 10px">
+  <h5>Share your song:</h5>
+
+  Song Name: {{view Em.TextField valueBinding="name"}} <br />
+  Artist: {{view Em.TextField valueBinding="artist" }} <br />
+
+  Share a <a {{bindAttr href="permalink"}}>link</a> to this song via <a {{bindAttr href="emailPermalink"}}>email</a>, <a {{bindAttr href="googlePermalink"}}>Google+</a>, <a {{bindAttr href="facebookPermalink"}}>Facebook</a> and <a {{bindAttr href="twitterPermalink"}}>Twitter</a>
+
+</div>
