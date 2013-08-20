@@ -1,7 +1,14 @@
-
 body {
   background-color: #151A33;
   line-height: 16px;
+}
+
+.header h2 {
+  float: left;
+}
+
+.header span {
+  float: right; padding: 10px
 }
 
   .playback {
