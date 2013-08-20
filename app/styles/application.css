@@ -1,4 +1,9 @@
 
+body {
+  background-color: #151A33;
+  line-height: 16px;
+}
+
   .playback {
     background-color: #2F3157;
     padding: 10px 20px;
