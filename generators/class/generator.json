@@ -1,8 +1,0 @@
-{
-  "files": [
-  ],
-  "dependencies": [
-	  {"name": "helper", "params": "{{name}}"},
-	  {"name": "template", "params": "{{name}}"}
-  ]
-}
