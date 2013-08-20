@@ -6,7 +6,6 @@ App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
     App.pubsub.subscribe('tick', this, this.onTick);
   },
   willDestroy: function() {
-    console.log('willDestory ChannelController');
     this._super();
     App.pubsub.unsubscribe('tick', this, this.onTick);
   },
@@ -16,24 +15,26 @@ App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
 
   previous: function() {
     this.set('sound', App.Channel.previous(this.get('sound')));
-    this.preview();
+    this.playSound();
   },
   next: function() {
     this.set('sound', App.Channel.next(this.get('sound')));
-    this.preview();
+    this.playSound();
   },
-  preview: function() {
-    this.playStep(
-      this.get('steps').objectAt(0)
-    );
-  },
+
   delete: function() {
     this.send('deleteChannel', this.get('model'));
   },
   playStep: function(step) {
+    this.playSound(step.get('velocity'));
+  },
+  playSound: function(velocity) {
+    if(velocity === undefined) {
+      velocity = 1;
+    }
     App.pubsub.publish('sound', {
       sound: this.get('sound'),
-      velocity: step.get('velocity') * this.get('volume'),
+      velocity: velocity * this.get('volume'),
       pan: this.get('pan')
     });
   },
