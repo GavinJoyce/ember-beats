@@ -4,18 +4,10 @@ App.Channel = Ember.Object.extend(Ember.Evented, {
   sound: 'kick',
   volume: 1,
   pan: 1,
-  steps: null,
-  init: function() {
-    this._super();
-
-    if(this.get('steps') === null) {
-      this.set('steps', Em.A());
-    }
-  },
+  steps: Em.A(),
   stepCount: function() {
     return this.get('steps').length;
   }.property('steps.length'),
-
   addStep: function(data) {
     this.get('steps').pushObject(
       App.Step.create(data)
@@ -26,12 +18,9 @@ App.Channel = Ember.Object.extend(Ember.Evented, {
       this.addStep();
     }
   },
-
   lastUpdated: function() {
     return new Date();
   }.property('sound', 'steps.length', 'steps.@each.lastUpdated'),
-
-
   serialize: function() {
     return {
       sound: this.get('sound'),
@@ -39,7 +28,6 @@ App.Channel = Ember.Object.extend(Ember.Evented, {
       steps: this.get('steps').invoke('serialize')
     };
   }
-
 }).reopenClass({
   sounds: [
     'cowbell',
@@ -59,7 +47,6 @@ App.Channel = Ember.Object.extend(Ember.Evented, {
     'rim',
     'kick'
   ],
-
   previous: function(sound) {
     var index = this.sounds.indexOf(sound);
     if(index === 0) {
@@ -86,5 +73,3 @@ App.Channel = Ember.Object.extend(Ember.Evented, {
     );
   }
 });
-
-
