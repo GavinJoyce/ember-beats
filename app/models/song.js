@@ -1,8 +1,6 @@
 var App = require('app');
 
 App.Song = Ember.Object.extend(Ember.Evented, {
-  name: '',
-  artist: '',
   tempo: 100,
   channels: Em.A(),
 
@@ -18,11 +16,9 @@ App.Song = Ember.Object.extend(Ember.Evented, {
   }.property('base64Compressed'),
   lastUpdated: function() {
     return new Date();
-  }.property('name', 'artist', 'tempo'),
+  }.property('tempo'),
   serialize: function() {
     return {
-      name: this.get('name'),
-      artist: this.get('artist'),
       tempo: this.get('tempo'),
       channels: this.get('channels').invoke('serialize')
     };
@@ -30,8 +26,6 @@ App.Song = Ember.Object.extend(Ember.Evented, {
 }).reopenClass({
   deserialise: function(data) {
     return App.Song.create({
-      name: data.name,
-      artist: data.artist,
       tempo: data.tempo,
       channels: App.Channel.deserialiseArray(data.channels)
     });
