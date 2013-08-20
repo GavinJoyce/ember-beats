@@ -1,14 +1,13 @@
 
-
-
-
   .playback {
     background-color: #2F3157;
     padding: 10px 20px;
     margin-top: 10px;
   }
 
-
+  .share {
+    background-color: white; padding: 20px; font-size: 20px; font-weight: bold;
+  }
 
   .main {
     padding: 20px;
