@@ -3,7 +3,7 @@ var App = require('app');
 App.SoundPlayer = Ember.Object.create({
     init: function() {
         var self = this;
-        App.Hub.subscribe('sound', function(sound) {
+        App.pubsub.subscribe('sound', function(sound) {
           self.howl.play(sound.sound, function(soundID) {
             self.howl.volume(sound.velocity, soundID);
             self.howl.pos3d({x: sound.pan }, soundID);

@@ -32,7 +32,7 @@ App.PlaybackController = Em.ObjectController.extend({
   tick: function() {
     if(this.get('isActive')) {
       this.incrementProperty('tickCount');
-      App.Hub.publish('tick', this.get('tickCount'));
+      App.pubsub.publish('tick', this.get('tickCount'));
 
       var self = this;
       setTimeout(function() {

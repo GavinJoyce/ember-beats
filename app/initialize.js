@@ -9,7 +9,7 @@ require('templates/song');
 require('templates/playback');
 require('templates/steps');
 
-require('models/hub');
+require('models/pubsub');
 require('models/song');
 require('models/step');
 require('models/channel');

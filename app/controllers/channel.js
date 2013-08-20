@@ -3,12 +3,12 @@ var App = require('app');
 App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
   init: function() {
     this._super();
-    App.Hub.subscribe('tick', this, this.onTick);
+    App.pubsub.subscribe('tick', this, this.onTick);
   },
   willDestroy: function() {
     console.log('willDestory ChannelController');
     this._super();
-    App.Hub.unsubscribe('tick', this, this.onTick);
+    App.pubsub.unsubscribe('tick', this, this.onTick);
   },
   class: function() {
     return "channel  " + this.get('sound');
@@ -25,7 +25,7 @@ App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
   },
 
   playStep: function(step) {
-    App.Hub.publish('sound', {
+    App.pubsub.publish('sound', {
       sound: this.get('sound'),
       velocity: step.get('velocity') * this.get('volume'),
       pan: this.get('pan')

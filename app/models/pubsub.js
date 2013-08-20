@@ -1,6 +1,6 @@
 var App = require('app');
 
-App.Hub = Ember.Object.createWithMixins(Ember.Evented, {
+App.pubsub = Ember.Object.createWithMixins(Ember.Evented, {
   publish: function() {
     return this.trigger.apply(this, arguments);
   },
