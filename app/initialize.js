@@ -22,8 +22,6 @@ require('controllers/step');
 require('controllers/song');
 require('controllers/playback');
 
-require('views/inplace-editor');
-
 require('router');
 
 App.initialize();

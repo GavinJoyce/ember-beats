@@ -1,6 +1,6 @@
 var App = require('app');
 
-App.Step = Ember.Object.extend(Ember.Evented, {
+App.Step = Ember.Object.extend({
   active: false,
   velocity: 0,
   enabled: function() {

@@ -1,6 +1,6 @@
 var App = require('app');
 
-App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
+App.ChannelController = Em.ObjectController.extend({
   init: function() {
     this._super();
     App.pubsub.subscribe('tick', this, this.onTick);

@@ -1,6 +1,6 @@
 var App = require('app');
 
-App.SongController = Em.ObjectController.extend(Ember.Evented, {
+App.SongController = Em.ObjectController.extend({
   updateUrl: function() {
     window.history.replaceState({ }, "", this.get('permalink'));
   }.observes('base64Compressed'),

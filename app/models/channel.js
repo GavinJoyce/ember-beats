@@ -1,6 +1,6 @@
 var App = require('app');
 
-App.Channel = Ember.Object.extend(Ember.Evented, {
+App.Channel = Ember.Object.extend({
   sound: 'kick',
   volume: 1,
   pan: 1,
