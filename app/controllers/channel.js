@@ -16,14 +16,20 @@ App.ChannelController = Em.ObjectController.extend(Ember.Evented, {
 
   previous: function() {
     this.set('sound', App.Channel.previous(this.get('sound')));
+    this.preview();
   },
   next: function() {
     this.set('sound', App.Channel.next(this.get('sound')));
+    this.preview();
+  },
+  preview: function() {
+    this.playStep(
+      this.get('steps').objectAt(0)
+    );
   },
   delete: function() {
     this.send('deleteChannel', this.get('model'));
   },
-
   playStep: function(step) {
     App.pubsub.publish('sound', {
       sound: this.get('sound'),
