@@ -4,7 +4,13 @@ App.Channel = Ember.Object.extend({
   sound: 'kick',
   volume: 1,
   pan: 1,
-  steps: Em.A(),
+  steps: null,
+  init: function() {
+    this._super();
+    if(this.get('steps') === null) {
+      this.set('steps', Em.A());
+    }
+  },
   stepCount: function() {
     return this.get('steps').length;
   }.property('steps.length'),
