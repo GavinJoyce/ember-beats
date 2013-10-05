@@ -23,5 +23,3 @@ require('controllers/song');
 require('controllers/playback');
 
 require('router');
-
-App.initialize();
