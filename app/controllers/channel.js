@@ -25,6 +25,15 @@ App.ChannelController = Em.ObjectController.extend({
   delete: function() {
     this.send('deleteChannel', this.get('model'));
   },
+
+  mute: function() {
+    this.set('volume', 0);
+  },
+
+  unmute: function() {
+    this.set('volume', 1);
+  },
+
   playStep: function(step) {
     this.playSound(step.get('velocity'));
   },
