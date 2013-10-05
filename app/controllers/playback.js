@@ -41,11 +41,11 @@ App.PlaybackController = Em.ObjectController.extend({
     }
   },
   increaseTempo: function() {
-    this.set('tempo', this.get('tempo') + 5);
+    this.set('tempo', this.get('tempo') + 1);
   },
   decreaseTempo: function() {
     if(this.get('tempo') > 5) {
-      this.set('tempo', this.get('tempo') - 5);
+      this.set('tempo', this.get('tempo') - 1);
     }
   },
   toggleShare: function() {
