@@ -4,31 +4,6 @@ App.PlaybackController = Em.ObjectController.extend({
   tickCount: null,
   isActive: false,
   shareVisible: false,
-  actions: {
-    start: function() {
-      if(!this.get('isActive')) {
-        this.set('isActive', true);
-        this.tick();
-       }
-     },
-     stop: function() {
-       this.set('isActive', false);
-       this.set('tickCount', null);
-     },
-    increaseTempo: function() {
-      this.set('tempo', this.get('tempo') + 1);
-    },
-    decreaseTempo: function() {
-      if(this.get('tempo') > 5) {
-        this.set('tempo', this.get('tempo') - 1);
-      }
-    },
-    toggleShare: function() {
-      this.toggleProperty('shareVisible');
-    },
-    
-  },
-
   sixteenth: function() {
     return (this.get('tickCount') % 4) + 1;
   }.property('tickCount'),
@@ -44,7 +19,16 @@ App.PlaybackController = Em.ObjectController.extend({
   display: function() {
     return this.get('bar') + ':' + this.get('beat') + ':' + this.get('sixteenth');
   }.property('tickCount'),
-  
+  start: function() {
+    if(!this.get('isActive')) {
+      this.set('isActive', true);
+      this.tick();
+    }
+  },
+  stop: function() {
+    this.set('isActive', false);
+    this.set('tickCount', null);
+  },
   tick: function() {
     if(this.get('isActive')) {
       this.incrementProperty('tickCount');
@@ -55,6 +39,17 @@ App.PlaybackController = Em.ObjectController.extend({
         self.tick();
       }, this.get('interval'));
     }
+  },
+  increaseTempo: function() {
+    this.set('tempo', this.get('tempo') + 1);
+  },
+  decreaseTempo: function() {
+    if(this.get('tempo') > 5) {
+      this.set('tempo', this.get('tempo') - 1);
+    }
+  },
+  toggleShare: function() {
+    this.toggleProperty('shareVisible');
   },
   encodedPermalink: function() {
     return encodeURIComponent(this.get('permalink'));
