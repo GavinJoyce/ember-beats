@@ -13,6 +13,27 @@ App.ChannelController = Em.ObjectController.extend({
     return "channel  " + this.get('sound');
   }.property('sound'),
 
+  previous: function() {
+    this.set('sound', App.Channel.previous(this.get('sound')));
+    this.playSound();
+  },
+  next: function() {
+    this.set('sound', App.Channel.next(this.get('sound')));
+    this.playSound();
+  },
+
+  delete: function() {
+    this.send('deleteChannel', this.get('model'));
+  },
+
+  mute: function() {
+    this.set('volume', 0);
+  },
+
+  unmute: function() {
+    this.set('volume', 1);
+  },
+
   playStep: function(step) {
     this.playSound(step.get('velocity'));
   },
@@ -39,30 +60,6 @@ App.ChannelController = Em.ObjectController.extend({
       this.playStep(step);
     }
   },
-  
-  actions: {
-    previous: function() {
-      this.set('sound', App.Channel.previous(this.get('sound')));
-      this.playSound();
-    },
-    next: function() {
-      this.set('sound', App.Channel.next(this.get('sound')));
-      this.playSound();
-    },
-
-    delete: function() {
-      this.send('deleteChannel', this.get('model'));
-    },
-
-    mute: function() {
-      this.set('volume', 0);
-    },
-
-    unmute: function() {
-      this.set('volume', 1);
-    },
-  }
-
 });
 
 
