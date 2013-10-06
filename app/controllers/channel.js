@@ -12,40 +12,38 @@ App.ChannelController = Em.ObjectController.extend({
   class: function() {
     return "channel  " + this.get('sound');
   }.property('sound'),
-
-  previous: function() {
-    this.set('sound', App.Channel.previous(this.get('sound')));
-    this.playSound();
-  },
-  next: function() {
-    this.set('sound', App.Channel.next(this.get('sound')));
-    this.playSound();
-  },
-
-  delete: function() {
-    this.send('deleteChannel', this.get('model'));
-  },
-
-  mute: function() {
-    this.set('volume', 0);
-  },
-
-  unmute: function() {
-    this.set('volume', 1);
-  },
-
-  playStep: function(step) {
-    this.playSound(step.get('velocity'));
-  },
-  playSound: function(velocity) {
-    if(velocity === undefined) {
-      velocity = 1;
-    }
-    App.pubsub.publish('sound', {
-      sound: this.get('sound'),
-      velocity: velocity * this.get('volume'),
-      pan: this.get('pan')
-    });
+  actions: {
+    previous: function() {
+      this.set('sound', App.Channel.previous(this.get('sound')));
+      this.send('playSound');
+    },
+    next: function() {
+      this.set('sound', App.Channel.next(this.get('sound')));
+      this.send('playSound');
+    },
+    delete: function() {
+      this.send('deleteChannel', this.get('model'));
+    },
+    playStep: function(step) {
+      this.send('playSound', step.get('velocity'));
+    },
+    playSound: function(velocity) {
+      if(velocity === undefined) {
+        velocity = 1;
+      }
+      App.pubsub.publish('sound', {
+        sound: this.get('sound'),
+        velocity: velocity * this.get('volume'),
+        pan: this.get('pan')
+      });
+    },
+    mute: function() {
+       this.set('volume', 0);
+     },
+ 
+     unmute: function() {
+       this.set('volume', 1);
+    },
   },
   onTick: function(tick) {
     var currentStepIndex = (tick-1) % this.get('stepCount');
@@ -57,9 +55,7 @@ App.ChannelController = Em.ObjectController.extend({
     step.set('active', true);
 
     if(step.get('enabled')) {
-      this.playStep(step);
+      this.send('playStep', step);
     }
-  },
+  }
 });
-
-
