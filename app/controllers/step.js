@@ -8,7 +8,6 @@ App.StepController = Em.ObjectController.extend({
       classes.push('active');
     } else {
       classes.push('inactive');
-
     }
 
     var velocity = this.get('velocity');
@@ -18,25 +17,25 @@ App.StepController = Em.ObjectController.extend({
       classes.push('velocity100');
     }
 
-     return classes.join(' ');
+    return classes.join(' ');
   }.property('velocity', 'active'),
+  actions: {
+    click: function() {
+      var velocity = this.get('velocity');
+      var model = this.get('model');
+      if(velocity === 0) {
+        this.set('velocity', 0.5);
+        this.send('play');
+      } else if(velocity === 0.5) {
+        this.set('velocity', 1);
+        this.send('play');
+      } else {
+        this.set('velocity', 0);
+      }
+    },
 
-  click: function() {
-    var velocity = this.get('velocity');
-    var model = this.get('model');
-    if(velocity === 0) {
-      this.set('velocity', 0.5);
-      this.play();
-    } else if(velocity === 0.5) {
-      this.set('velocity', 1);
-      this.play();
-    } else {
-      this.set('velocity', 0);
+    play: function() {
+      this.send('playStep', this.get('model'));
     }
-  },
-
-  play: function() {
-    this.send('playStep', this.get('model'));
   }
 });
-
