@@ -37,6 +37,13 @@ App.ChannelController = Em.ObjectController.extend({
         pan: this.get('pan')
       });
     },
+    mute: function() {
+       this.set('volume', 0);
+     },
+ 
+     unmute: function() {
+       this.set('volume', 1);
+    },
   },
   onTick: function(tick) {
     var currentStepIndex = (tick-1) % this.get('stepCount');
