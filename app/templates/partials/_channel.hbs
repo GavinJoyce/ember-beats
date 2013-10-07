@@ -1,12 +1,12 @@
 <div {{bindAttr class="class"}}>
   <span class="channel-cycle">
     <div>
-      <button type="button" class="tiny transparent" {{action previous}}>
+      <button type="button" class="tiny transparent" {{action previous}} title="Previous Sound">
         <i class="icon-circle-arrow-up icon-white"></i>
       </button>
     </div>
     <div>
-      <button type="button" class="tiny transparent" {{action next}}>
+      <button type="button" class="tiny transparent" {{action next}} title="Next Sound">
         <i class="icon-circle-arrow-down icon-white"></i>
       </button>
     </div>
@@ -14,15 +14,18 @@
   <span class="controls">
     <h3>{{sound}}</h3>
     <span class="channel-closer">
-    {{#if volume}}
-       <button type="button" class="tiny transparent" {{action mute}}>
-         <i class="icon-volume-off icon-white"></i>
-       </button>
-     {{else}}
-       <button type="button" class="tiny transparent" {{action unmute}}>
-        <i class="icon-volume-up icon-white"></i>
-       </button>
-    {{/if}}
+      {{#if volume}}
+        <button type="button" class="tiny transparent" {{action mute}} title="Mute Channel">
+          <i class="icon-volume-up icon-white"></i>
+        </button>
+      {{else}}
+        <button type="button" class="tiny transparent" {{action unmute}} title="Unmute Channel">
+          <i class="icon-volume-off icon-white"></i>
+        </button>
+      {{/if}}
+      <button type="button" class="tiny transparent" {{action delete}} title="Delete Channel">
+        <i class="icon-remove-circle icon-white"></i>
+      </button>
     </span>
   </span>
 

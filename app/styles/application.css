@@ -50,6 +50,8 @@ body {
     line-height: 22px;
   }
 
+  .channel.muted .controls         { opacity: 0.5; }
+
   .channel.cowbell .controls       { background-color: #c73535; }
   .channel.tom_mid .controls       { background-color: #c73535; }
 
@@ -115,6 +117,7 @@ body {
 
 
   .channel li {  display: inline; }
+  .channel.muted li  { opacity: 0.3; }
   .channel .steps ul { margin: 0;  }
   .channel .steps li {
     width: 6.25%;

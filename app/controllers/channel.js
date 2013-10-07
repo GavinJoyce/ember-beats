@@ -10,8 +10,13 @@ App.ChannelController = Em.ObjectController.extend({
     App.pubsub.unsubscribe('tick', this, this.onTick);
   },
   class: function() {
-    return "channel  " + this.get('sound');
-  }.property('sound'),
+    var classes = ["channel  " + this.get('sound')];
+    if(!this.get('volume')) {
+      classes.push('muted');
+    }
+
+    return classes.join(' ');
+  }.property('sound', 'volume'),
   actions: {
     previous: function() {
       this.set('sound', App.Channel.previous(this.get('sound')));
