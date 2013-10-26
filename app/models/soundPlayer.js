@@ -11,7 +11,7 @@ App.SoundPlayer = Ember.Object.create({
         });
     },
     howl: new Howl({
-        urls: ['sprite.mp3'],
+        urls: ['sprite.mp3','sprite.ogg'],
         sprite: {
             cowbell: [0, 300],
             conga_hi: [400, 300],
