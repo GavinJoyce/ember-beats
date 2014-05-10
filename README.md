@@ -11,7 +11,5 @@ Video: https://www.youtube.com/watch?v=zvKVmZXqico
 
 Setup:
 
- - Install Node.js
- - ```npm install -g brunch@1.7.0```
  - ```npm install```
- - ```brunch watch -s```
+ - ```ember server```

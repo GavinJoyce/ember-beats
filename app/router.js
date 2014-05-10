@@ -1,18 +1,9 @@
-var App = require('app');
-
-App.IndexRoute = Em.Route.extend({
-  model: function() {
-    return App.Song.default();
-  }
+var Router = Ember.Router.extend({
+  location: 'auto'
 });
 
-App.SongRoute = Em.Route.extend({
-  model: function(params) {
-    return App.Song.fromBase64Compressed(params.base64);
-  }
+Router.map(function() {
+  this.route('song', { path: 'song/:base64' });
 });
 
-App.Router.map(function(){
-    this.route('index', { path:'/' });
-    this.route('song', { path: '/song/:base64' });
-});
+export default Router;

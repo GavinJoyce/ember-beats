@@ -1,32 +1,27 @@
 {
-  "author": "Gavin Joyce",
-  "name": "ember-beats",
-  "description": "A drum machine built with Ember.js",
-  "version": "0.1.0",
-  "homepage": "https://github.com/gavinjoyce/ember-beats",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gavinjoyce/ember-beats"
-  },
-  "engines": {
-    "node": "~0.6.10 || 0.8 || 0.9"
+  "name": "emberbeats",
+  "APIMethod": "stub",
+  "version": "0.0.0",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "test"
   },
   "scripts": {
-    "start": "brunch watch --server",
-    "test": "brunch test"
+    "start": "ember server",
+    "build": "ember build",
+    "test": "ember test"
   },
-  "dependencies": {
-    "javascript-brunch": ">= 1.0 < 1.5",
-    "stylus-brunch": "1.5.1",
-    "css-brunch": ">= 1.0 < 1.5",
-    "ember-handlebars-brunch": "git+ssh://git@github.com:bartsqueezy/ember-handlebars-brunch.git",
-    "uglify-js-brunch": ">= 1.0 < 1.5",
-    "clean-css-brunch": ">= 1.0 < 1.5",
-    "jshint-brunch": "1.6.0",
-    "auto-reload-brunch": "<=1.5",
-    "grunt": "~0.4.1",
-    "grunt-s3": "~0.2.0-alpha.2",
-    "grunt-exec": "~0.4.2"
+  "repository": "https://github.com/stefanpenner/ember-cli",
+  "engines": {
+    "node": ">= 0.10.0"
   },
-  "devDependencies": {}
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "ember-cli" : "0.0.25",
+    "originate": "0.1.5",
+    "broccoli-template": "0.1.1",
+    "loom-generators-ember-appkit": "^1.1.0"
+  }
 }
