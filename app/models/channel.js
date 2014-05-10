@@ -1,81 +1,66 @@
-var App = require('app');
+import Step from './step';
+import Audio from './audio';
+import sounds from './data/sounds';
+import { Serializer, Deserializer } from './mixins/channel-serialization';
 
-App.Channel = Ember.Object.extend({
+export default Em.Object.extend(Serializer, {
   sound: 'kick',
   volume: 1,
-  pan: 1,
   steps: null,
-  init: function() {
-    this._super();
+  setup: function() {
     if(this.get('steps') === null) {
       this.set('steps', Em.A());
+      this.addSteps(16);
+    }
+    this.get('lastUpdated');
+  }.on('init'),
+  tick: function(tickCount) {
+    var stepIndex = (tickCount-1) % this.get('steps.length');
+    var steps = this.get('steps');
+    steps.setEach('active', false);
+
+    var step = steps.objectAt(stepIndex);
+    step.set('active', true);
+
+    if(step.get('enabled')) {
+      var volume = step.get('velocity') * this.get('volume');
+      Audio.play(this.get('sound'), volume);
     }
   },
-  stepCount: function() {
-    return this.get('steps').length;
-  }.property('steps.length'),
   addStep: function(data) {
-    this.get('steps').pushObject(
-      App.Step.create(data)
-    );
+    this.get('steps').pushObject(Step.create(data));
   },
   addSteps: function(n) {
     for(var i=0; i<n; i++) {
       this.addStep();
     }
   },
-  lastUpdated: function() {
-    return new Date();
-  }.property('sound', 'steps.length', 'steps.@each.lastUpdated'),
-  serialize: function() {
-    return {
-      sound: this.get('sound'),
-      volume: this.get('volume'),
-      steps: this.get('steps').invoke('serialize')
-    };
-  }
-}).reopenClass({
-  sounds: [
-    'cowbell',
-    'conga_hi',
-    'cymbal',
-    'conga_mid',
-    'conga_low',
-    'hihat_open',
-    'tom_hi',
-    'maracas',
-    'tom_mid',
-    'hihat_closed',
-    'tom_low',
-    'clave',
-    'clap',
-    'snare',
-    'rim',
-    'kick'
-  ],
+  removeStep: function() {
+    this.get('steps').popObject();
+  },
+  previousSound: function() {
+    this.set('sound', this.previous(this.get('sound')));
+    this.previewSound();
+  },
+  nextSound: function() {
+    this.set('sound', this.next(this.get('sound')));
+    this.previewSound();
+  },
+  previewSound: function() {
+    Audio.play(this.get('sound'), this.get('volume'));
+  },
   previous: function(sound) {
-    var index = this.sounds.indexOf(sound);
+    var index = sounds.indexOf(sound);
     if(index === 0) {
-      index = this.sounds.length;
+      index = sounds.length;
     }
-    return this.sounds[index - 1];
+    return sounds[index - 1];
   },
   next: function(sound) {
-    var index = this.sounds.indexOf(sound);
-    if(index == this.sounds.length - 1) {
+    var index = sounds.indexOf(sound);
+    if(index === sounds.length - 1) {
       index = -1;
     }
-    return this.sounds[index + 1];
-  },
-  deserialiseArray: function(data) {
-    return Em.A(
-      data.map(function(item) {
-        return App.Channel.create({
-          sound: item.sound,
-          volume: item.volume,
-          steps: App.Step.deserialiseArray(item.steps)
-        });
-      })
-    );
+    return sounds[index + 1];
   }
-});
+}).reopenClass(Deserializer);

@@ -1,0 +1,55 @@
+<div class="playback">
+  <div class="btn-toolbar">
+    {{#if isActive}}
+      <button type="button" class="btn btn-danger" {{action 'stop'}}>
+        <i class="icon-stop"></i>
+      </button>
+    {{else}}
+      <button type="button" class="btn" {{action 'start'}}>
+        <i class="icon-play"></i>
+      </button>
+    {{/if}}
+
+    <div class="btn-group"></div>
+
+    <div class="btn-group">
+      <button type="button" class="btn" {{action 'decreaseTempo'}}>
+        <i class="icon-minus-sign"></i>
+      </button>
+      <button type="button" class="btn"><strong>{{song.tempo}} bpm</strong></button>
+      <button type="button" class="btn" {{action 'increaseTempo'}}>
+        <i class="icon-plus-sign"></i>
+      </button>
+    </div>
+
+    <div class="btn-group">
+      <button type="button" class="btn"><strong>{{display}}</strong></button>
+    </div>
+
+    <div class="btn-group" style="float: right;">
+      <a class="btn dropdown-toggle" data-toggle="dropdown">
+        Presets
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu">
+        <li>
+          <a {{action switchToPreset 'default'}}>Default</a>
+          <a {{action switchToPreset 'sundaybloodysunday'}}>Sunday Bloody Sunday - U2</a>
+          <a {{action switchToPreset 'sexualhealing'}}>Sexual Healing - Marvin Gaye</a>
+          <a {{action switchToPreset '15step'}}>15 Step - Radiohead</a>
+          <a {{action switchToPreset 'nude'}}>Nude - Radiohead</a>
+          <a {{action switchToPreset 'idioteque'}}>Idioteque - Radiohead</a>
+          <a {{action switchToPreset 'arpeggi'}}>Arpeggi - Radiohead</a>
+          <a {{action switchToPreset 'imightbewrong'}}>I Might Be Wrong - Radiohead</a>
+          <a {{action switchToPreset 'identikit'}}>Identikit - Radiohead</a>
+          <a {{action switchToPreset 'ingenue'}}>Ingenue - Radiohead</a>
+          <a {{action switchToPreset 'blackswan'}}>Black Swan - Radiohead</a>
+          <a {{action switchToPreset 'lotusflower'}}>Lotus Flower - Radiohead</a>
+          <a {{action switchToPreset 'juicy'}}>Juicy - B.I.G.</a>
+          <a {{action switchToPreset 'themessage'}}>The Message - Grandmaster</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
