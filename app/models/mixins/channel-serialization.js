@@ -3,7 +3,7 @@ import Step from './../step';
 var Serializer = Em.Mixin.create({
   lastUpdated: function() {
     return new Date();
-  }.property('sound', 'steps.length', 'steps.@each.lastUpdated'),
+  }.property('sound', 'steps.@each.lastUpdated'),
   serialize: function() {
     return {
       sound: this.get('sound'),
