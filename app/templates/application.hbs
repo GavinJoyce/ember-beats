@@ -1,0 +1,6 @@
+<h1>Ember.js Beats</h1>
+
+
+{{#each audioService.sounds as |sound|}}
+  <button onmouseover={{action 'play' sound}}>Play {{sound}}</button>
+{{/each}}
