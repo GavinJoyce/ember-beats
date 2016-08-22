@@ -1,9 +1,0 @@
-{{controls-component song=model switchToPreset='switchToPreset'}}
-
-<div class="main">
-  {{#each channel in channels}}
-    {{channel-component channel=channel deleteChannel='deleteChannel'}}
-  {{/each}}
-
-  {{add-channel-component action='addChannel'}}
-</div>
