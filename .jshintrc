@@ -3,7 +3,8 @@
     "document",
     "window",
     "-Promise",
-    "Howl"
+    "Howl",
+    "LZString"
   ],
   "browser": true,
   "boss": true,
