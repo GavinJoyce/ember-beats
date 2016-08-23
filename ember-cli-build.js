@@ -8,6 +8,7 @@ module.exports = function(defaults) {
   });
 
   app.import('bower_components/howler.js/dist/howler.core.min.js');
+  app.import('bower_components/lz-string/libs/lz-string.min.js');
 
   return app.toTree();
 };
