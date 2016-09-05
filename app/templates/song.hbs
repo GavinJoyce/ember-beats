@@ -1,3 +1,16 @@
-<h1>Song here: {{model.name}}</h1>
+{{controls-component}}
+
+<h1>{{model.name}}</h1>
+
+<table style="width: 100%;">
+{{#each model.channels as |channel|}}
+  <tr>
+    <td align="center">{{channel.sound}}</td>
+    {{#each channel.steps as |step|}}
+      <td>{{step.velocity}}</td>
+    {{/each}}
+  </tr>
+{{/each}}
+</table>
 
 {{outlet}}
