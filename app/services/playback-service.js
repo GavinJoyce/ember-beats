@@ -14,6 +14,11 @@ export default Ember.Service.extend({
       tickCount: 0,
       isPlaying: true
     });
+    this.tick();
+  },
+
+  tick() {
+    //TODO: move to next step, schedule a run later
   },
 
   stop() {
