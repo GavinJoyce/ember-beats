@@ -8,6 +8,8 @@ export default Ember.Service.extend({
     this.incrementProperty('tickCount');
   },
 
+  tempo: Ember.computed.alias('song.tempo'),
+
   tickInterval: Ember.computed('song.tempo', function() {
     let beatsPerSecond = this.get('song.tempo') / 60;
     let sixteenthsPerSecond = beatsPerSecond * 4;
