@@ -33,3 +33,25 @@ test('tickInterval', function(assert) {
   service.set('song', Song.create({ tempo: 120 }));
   assert.equal(service.get('tickInterval'), 125);
 });
+
+test('play', function(assert) {
+  let service = this.subject();
+
+  service.set('tickCount', 100);
+  service.set('isplaying', false);
+
+  service.play();
+
+  assert.equal(service.get('tickCount'), 0);
+  assert.equal(service.get('isPlaying'), true);
+});
+
+test('stop', function(assert) {
+  let service = this.subject();
+
+  service.set('isplaying', true);
+
+  service.stop();
+
+  assert.equal(service.get('isPlaying'), false);
+});

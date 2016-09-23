@@ -3,9 +3,21 @@ import Ember from 'ember';
 export default Ember.Service.extend({
   tickCount: 0,
   song: null,
+  isPlaying: false,
 
   next() {
     this.incrementProperty('tickCount');
+  },
+
+  play() {
+    this.setProperties({
+      tickCount: 0,
+      isPlaying: true
+    });
+  },
+
+  stop() {
+    this.set('isPlaying', false);
   },
 
   tempo: Ember.computed.alias('song.tempo'),
