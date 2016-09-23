@@ -1,4 +1,5 @@
 import { moduleFor, test } from 'ember-qunit';
+import Song from 'ember-beats/models/song';
 
 moduleFor('service:playback-service', 'Unit | Service | playback service', {
   // Specify the other units that are required for this test.
@@ -21,4 +22,14 @@ test('it calculates the bars, beats and sixteenths', function(assert) {
 
   service.set('tickCount', 16);
   assert.equal(service.get('display'), '2:1:1');
+});
+
+test('tickInterval', function(assert) {
+  let service = this.subject();
+
+  service.set('song', Song.create({ tempo: 60 }));
+  assert.equal(service.get('tickInterval'), 250);
+
+  service.set('song', Song.create({ tempo: 120 }));
+  assert.equal(service.get('tickInterval'), 125);
 });
