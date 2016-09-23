@@ -6,6 +6,12 @@ export default Ember.Component.extend({
   actions: {
     next() {
       this.get('playbackService').next();
+    },
+    play() {
+      this.get('playbackService').play();
+    },
+    stop() {
+      this.get('playbackService').stop();
     }
   }
 });

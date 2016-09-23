@@ -1,5 +1,10 @@
 TODO: Controls
 
 <h1>{{playbackService.display}}</h1>
+<h2>{{playbackService.tickInterval}} ({{playbackService.tempo}} BPM)</h2>
+
+isPalying: {{playbackService.isPlaying}}
 
 <button onclick={{action 'next'}}>Next ></button>
+<button onclick={{action 'play'}}>Play</button>
+<button onclick={{action 'stop'}}>Stop</button>
