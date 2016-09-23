@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import { moduleFor } from 'ember-qunit';
 import test from 'ember-beats/tests/ember-sinon-qunit/test';
 import Song from 'ember-beats/models/song';
@@ -57,4 +58,42 @@ test('stop', function(assert) {
   service.stop();
 
   assert.equal(service.get('isPlaying'), false);
+});
+
+test('tick while stopped', function(assert) {
+  let service = this.subject();
+  let nextTick = this.stub(service, 'nextTick');
+  let later = this.stub(Ember.run, 'later');
+
+  service.setProperties({
+    song: Song.create({ tempo: 60 }),
+    isPlaying: false
+  });
+
+  service.tick();
+
+  assert.ok(nextTick.notCalled, 'nextTick should not be called when stopped');
+  assert.ok(later.notCalled, 'Ember.run.later should not be called when stopped');
+});
+
+test('tick while playing', function(assert) {
+  let service = this.subject();
+  let nextTick = this.stub(service, 'nextTick');
+  let later = this.stub(Ember.run, 'later');
+
+  service.setProperties({
+    song: Song.create({ tempo: 60 }),
+    isPlaying: true
+  });
+
+  service.tick();
+
+  assert.ok(nextTick.calledOnce, 'nextTick should be called when playing');
+  assert.ok(
+    later.calledWith(
+      service,
+      service.tick,
+      service.get('tickInterval')
+    ), 'Ember.run.later should be called when playing'
+  );
 });

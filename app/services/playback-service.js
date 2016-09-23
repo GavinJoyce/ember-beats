@@ -5,10 +5,6 @@ export default Ember.Service.extend({
   song: null,
   isPlaying: false,
 
-  next() {
-    this.incrementProperty('tickCount');
-  },
-
   play() {
     this.setProperties({
       tickCount: 0,
@@ -18,7 +14,14 @@ export default Ember.Service.extend({
   },
 
   tick() {
-    //TODO: move to next step, schedule a run later
+    if(this.get('isPlaying')) {
+      this.nextTick();
+      Ember.run.later(this, this.tick, this.get('tickInterval'));
+    }
+  },
+
+  nextTick() {
+    this.incrementProperty('tickCount');
   },
 
   stop() {

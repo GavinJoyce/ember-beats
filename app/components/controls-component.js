@@ -5,7 +5,7 @@ export default Ember.Component.extend({
 
   actions: {
     next() {
-      this.get('playbackService').next();
+      this.get('playbackService').nextTick();
     }
   }
 });
