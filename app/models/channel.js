@@ -3,10 +3,21 @@ import Step from './step';
 
 let Channel = Em.Object.extend({
   steps: null,
+  stepIndex: null,
 
   init() {
     this._super(...arguments);
     this.set('steps', Em.A());
+  },
+
+  setTick(tickCount) {
+    let steps = this.get('steps');
+    let stepIndex = (tickCount-1) % steps.get('length');
+
+    steps.setEach('isPlaying', false);
+
+    let step = steps.objectAt(stepIndex);
+    step.set('isPlaying', true);
   },
 
   serialize() {

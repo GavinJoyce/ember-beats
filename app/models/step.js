@@ -1,6 +1,8 @@
 import Em from 'ember';
 
 let Step = Em.Object.extend({
+  isPlaying: false,
+
   serialize() {
     return {
       velocity: this.get('velocity')

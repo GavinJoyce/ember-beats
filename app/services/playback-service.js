@@ -22,9 +22,10 @@ export default Ember.Service.extend({
     }
   },
 
-  playCurrentTick(/*tickCount*/) { //TODO: GJ: rename to `playCurrentTick`
-    //song.setTick()
-    //song.getNotes()
+  playCurrentTick(tickCount) {
+    let song = this.get('song');
+    song.setTick(tickCount);
+    // let notes = song.getNotes();
     //play each note
   },
 

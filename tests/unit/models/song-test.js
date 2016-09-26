@@ -26,3 +26,51 @@ test('it can serialize a song', function(assert) {
 
   assert.equal(song.toEncodedBase64(), FIFTEEN_STEP_ENCODED_BASE_64_DATA);
 });
+
+test('setTick', function(assert) {
+  let song = Song.fromEncodedBase64(FIFTEEN_STEP_ENCODED_BASE_64_DATA);
+
+  song.setTick(1);
+
+  assert.equal(song.get('channels.0.steps.0.isPlaying'), true);
+  assert.equal(song.get('channels.0.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.0.steps.9.isPlaying'), false);
+
+  assert.equal(song.get('channels.3.steps.0.isPlaying'), true);
+  assert.equal(song.get('channels.3.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.9.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.10.isPlaying'), false);
+
+  song.setTick(2);
+
+  assert.equal(song.get('channels.0.steps.0.isPlaying'), false);
+  assert.equal(song.get('channels.0.steps.1.isPlaying'), true);
+  assert.equal(song.get('channels.0.steps.9.isPlaying'), false);
+
+  assert.equal(song.get('channels.3.steps.0.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.1.isPlaying'), true);
+  assert.equal(song.get('channels.3.steps.9.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.10.isPlaying'), false);
+
+  song.setTick(10);
+
+  assert.equal(song.get('channels.0.steps.0.isPlaying'), false);
+  assert.equal(song.get('channels.0.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.0.steps.9.isPlaying'), true);
+
+  assert.equal(song.get('channels.3.steps.0.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.9.isPlaying'), true);
+  assert.equal(song.get('channels.3.steps.10.isPlaying'), false);
+
+  song.setTick(11);
+
+  assert.equal(song.get('channels.0.steps.0.isPlaying'), true);
+  assert.equal(song.get('channels.0.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.0.steps.9.isPlaying'), false);
+
+  assert.equal(song.get('channels.3.steps.0.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.1.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.9.isPlaying'), false);
+  assert.equal(song.get('channels.3.steps.10.isPlaying'), true);
+});
