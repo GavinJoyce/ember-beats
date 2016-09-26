@@ -63,7 +63,7 @@ test('stop', function(assert) {
 
 test('tick while stopped', function(assert) {
   let service = this.subject();
-  let nextTick = this.stub(service, 'nextTick');
+  let playCurrentTick = this.stub(service, 'playCurrentTick');
   let later = this.stub(Ember.run, 'later');
 
   service.setProperties({
@@ -73,23 +73,25 @@ test('tick while stopped', function(assert) {
 
   service.tick();
 
-  assert.ok(nextTick.notCalled, 'nextTick should not be called when stopped');
+  assert.ok(playCurrentTick.notCalled, 'playCurrentTick should not be called when stopped');
   assert.ok(later.notCalled, 'Ember.run.later should not be called when stopped');
 });
 
 test('tick while playing', function(assert) {
   let service = this.subject();
-  let nextTick = this.stub(service, 'nextTick');
+  let playCurrentTick = this.stub(service, 'playCurrentTick');
   let later = this.stub(Ember.run, 'later');
 
   service.setProperties({
     song: Song.create({ tempo: 60 }),
-    isPlaying: true
+    isPlaying: true,
+    tickCount: 10
   });
 
   service.tick();
 
-  assert.ok(nextTick.calledOnce, 'nextTick should be called when playing');
+  assert.ok(playCurrentTick.calledOnce, 'playCurrentTick should be called when playing');
+  assert.ok(playCurrentTick.calledWith(11), 'playCurrentTick should receive the next tick');
   assert.ok(
     later.calledWith(
       service,

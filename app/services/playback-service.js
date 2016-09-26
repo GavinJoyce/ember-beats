@@ -15,13 +15,17 @@ export default Ember.Service.extend({
 
   tick() {
     if(this.get('isPlaying')) {
-      this.nextTick();
+      let tickCount = this.incrementProperty('tickCount');
+
+      this.playCurrentTick(tickCount);
       Ember.run.later(this, this.tick, this.get('tickInterval'));
     }
   },
 
-  nextTick() {
-    this.incrementProperty('tickCount');
+  playCurrentTick(/*tickCount*/) { //TODO: GJ: rename to `playCurrentTick`
+    //song.setTick()
+    //song.getNotes()
+    //play each note
   },
 
   stop() {
