@@ -9,6 +9,16 @@ let Channel = Em.Object.extend({
     this.set('steps', Em.A());
   },
 
+  setTick(tickCount) {
+    let steps = this.get('steps');
+    let stepIndex = (tickCount - 1) % steps.get('length');
+
+    steps.setEach('isPlaying', false);
+
+    let step = steps.objectAt(stepIndex);
+    step.set('isPlaying', true);
+  },
+
   serialize() {
     return {
       sound: this.get('sound'),
