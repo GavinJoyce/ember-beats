@@ -9,6 +9,10 @@ let Song = Em.Object.extend({
     this.set('channels', Em.A());
   },
 
+  setTick(tickCount) {
+    this.get('channels').invoke('setTick', tickCount);
+  },
+
   serialize() {
     return {
       name: this.get('name'),

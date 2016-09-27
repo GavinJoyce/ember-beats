@@ -7,7 +7,7 @@
   <tr>
     <td align="center">{{channel.sound}}</td>
     {{#each channel.steps as |step|}}
-      <td>{{step.velocity}}</td>
+      <td style="{{if step.isPlaying 'background-color: green;'}}">{{step.velocity}}</td>
     {{/each}}
   </tr>
 {{/each}}

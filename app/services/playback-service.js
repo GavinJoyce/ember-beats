@@ -2,10 +2,47 @@ import Ember from 'ember';
 
 export default Ember.Service.extend({
   tickCount: 0,
+  song: null,
+  isPlaying: false,
+  tempo: Ember.computed.alias('song.tempo'),
 
   next() {
     this.incrementProperty('tickCount');
   },
+
+  play() {
+    this.setProperties({
+      isPlaying: true,
+      tickCount: 0
+    });
+    this.tick();
+  },
+
+  stop() {
+    this.set('isPlaying', false);
+  },
+
+  tick() {
+    if(this.get('isPlaying')) {
+      let tickCount = this.incrementProperty('tickCount');
+      this.playTick(tickCount);
+
+      Ember.run.later(this, this.tick, this.get('tickInterval'));
+    }
+  },
+
+  playTick(tickCount) {
+    this.get('song').setTick(tickCount);
+    //let notes = song.getCurrentNotes();
+    //soundService.play(notes);
+  },
+
+  tickInterval: Ember.computed('song.tempo', function() {
+    let beatsPerSecond = this.get('song.tempo') / 60;
+    let sixteenthsPerSecond = beatsPerSecond * 4;
+    let tickInterval = 1000 / sixteenthsPerSecond;
+    return tickInterval;
+  }),
 
   display: Ember.computed('bars', 'beats', 'sixteenths', function() {
     let bars = this.get('bars');
