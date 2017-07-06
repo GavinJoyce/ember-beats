@@ -33,8 +33,15 @@ export default Em.Service.extend({
     return Object.keys(howl._sprite);
   }),
 
-  play(sound) {
+  play(sound, volume = 1) {
     let howl = this.get('howl');
-    howl.play(sound);
+    let soundId = howl.play(sound);
+    howl.volume(volume, soundId);
+  },
+
+  playNotes(notes) {
+    notes.forEach(note => {
+      this.play(note.sound, note.volume);
+    });
   }
 });
