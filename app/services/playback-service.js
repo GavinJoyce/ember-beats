@@ -1,13 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
+  audioService: Ember.inject.service(),
+
   tickCount: 0,
   song: null,
   isPlaying: false,
   tempo: Ember.computed.alias('song.tempo'),
 
   next() {
-    this.incrementProperty('tickCount');
+    let tickCount = this.incrementProperty('tickCount');
+    this.playTick(tickCount);
   },
 
   play() {
@@ -32,9 +35,12 @@ export default Ember.Service.extend({
   },
 
   playTick(tickCount) {
-    this.get('song').setTick(tickCount);
-    //let notes = song.getCurrentNotes();
-    //soundService.play(notes);
+    let song = this.get('song');
+    song.setTick(tickCount);
+    let notes = song.getCurrentNotes();
+
+    let audioService = this.get('audioService');
+    audioService.playNotes(notes);
   },
 
   tickInterval: Ember.computed('song.tempo', function() {
