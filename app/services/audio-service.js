@@ -36,5 +36,14 @@ export default Em.Service.extend({
   play(sound) {
     let howl = this.get('howl');
     howl.play(sound);
+  },
+
+  playNotes(notes) {
+    let howl = this.get('howl');
+
+    notes.forEach(note => {
+      let id = howl.play(note.sound);
+      howl.volume(note.volume, id);
+    });
   }
 });
