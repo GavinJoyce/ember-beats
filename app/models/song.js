@@ -13,6 +13,25 @@ let Song = Em.Object.extend({
     this.get('channels').invoke('setTick', tickCount);
   },
 
+  getCurrentNotes() {
+    let notes = [];
+
+    this.get('channels').forEach(channel => {
+      let playingStep = channel.get('steps').find(step => step.get('isPlaying'));
+
+      let volume = channel.get('volume') * playingStep.get('velocity');
+
+      if(volume > 0) {
+        notes.push({
+          sound: channel.get('sound'),
+          volume
+        });
+      }
+    });
+
+    return notes;
+  },
+
   serialize() {
     return {
       name: this.get('name'),
